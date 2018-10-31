@@ -15,11 +15,11 @@ class sendDb{
         request({
             url: url,
             method: "POST",
-            json: true,
             headers: {
-                "content-type": "application/json"
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Content-Length':data.length
             },
-            body: JSON.stringify(data)
+            form: data,
         }, function(error, response, body) {
 
             if (!error && response.statusCode == 200) {

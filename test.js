@@ -1,5 +1,5 @@
 const huya_danmu = require('./index');
-const roomid = 'xiaozhan';
+const roomid = 'kaerlol';
 const client = new huya_danmu(roomid);
 const sendDb = require('./sendDb');
 
@@ -42,8 +42,7 @@ function setData(msg){
     var createtime = msg.time;
 
     // 过滤 代言消息
-    // var check = checkMessage(content);
-    var check = content;
+    var check = checkMessage(content);
 
     if (!check || content == ''){
         return false;
@@ -56,20 +55,25 @@ function setData(msg){
     setDbData.push(tmpObj);
 
     //
-    if (setDbData.length >= 2){
+    if (setDbData.length >= 10){
         // 写入到数据库
-        var saveData = setDbData;
-        setDbData = [];
+        var saveData = {'danmu':setDbData};
         console.log('insert');
         new sendDb(saveData);
+        setDbData = [];
         return true;
     }
 }
 
 /**
- *
+ * 过滤无用弹幕
  */
 function checkMessage(content) {
+
+    // 长度过短的弹幕
+    if (content.length <=3){
+        return false;
+    }
 
     // 检查 过滤无用弹幕
     var check =  ['分享了直播间','hahaha','哈哈哈','233','666','牛逼','收','高能预警','前方高能反应','???','...','。。。'];
