@@ -9,8 +9,8 @@ class sendDb{
 
     send(data){
 
-        // var url="http://hx.yuanxu.top/api/Danmu/add";
-        var url="http://huya.web/api/danmu/add";
+        var url="http://hx.yuanxu.top/api/Danmu/add";
+        // var url="http://huya.web/api/danmu/add";
 
         request({
             url: url,
