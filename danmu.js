@@ -1,5 +1,5 @@
 const huya_danmu = require('./index');
-const roomid = 'kaerlol';
+const roomid = 'longdd';
 const client = new huya_danmu(roomid);
 const sendDb = require('./sendDb');
 
