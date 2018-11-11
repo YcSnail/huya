@@ -14,7 +14,12 @@ client.on('message', msg => {
             // console.log(`[${msg.from.name}]`+ msg.content);
             break;
         case 'gift':
-            // console.log(`[${msg.from.name}]->赠送${msg.count}个${msg.name}`)
+
+            // 判断价格
+            if (msg.price >=0){
+                setGift(msg);
+            }
+            console.log(`[${msg.from.name}]->赠送${msg.count}个${msg.name}`)
             break;
         case 'online':
             // console.log(`[当前人气]:${msg.count}`)
@@ -32,6 +37,35 @@ client.on('close', () => {
 client.start();
 
 // 请求数据库保存
+var setDbGift = [];
+
+function setGift(msg){
+
+    var userName = msg.from.name;
+    var giftName = msg.name;
+    var count = msg.count;
+    var price = msg.price;
+    var createtime = msg.time;
+
+    var tmpObj = {};
+    tmpObj.username = userName;
+    tmpObj.giftName = giftName;
+    tmpObj.count = count;
+    tmpObj.price = price;
+    tmpObj.createtime = parseInt(createtime/1000);
+    setDbGift.push(tmpObj);
+
+    //
+    if (setDbGift.length >= 10){
+        // 写入到数据库
+        var saveData = {'gift':setDbGift};
+        console.log('insert gift');
+        var DB = new sendDb();
+        DB.gift(saveData);
+        setDbGift = [];
+        return true;
+    }
+}
 
 var setDbData = [];
 
@@ -59,7 +93,9 @@ function setData(msg){
         // 写入到数据库
         var saveData = {'danmu':setDbData};
         console.log('insert');
-        new sendDb(saveData);
+        var DB = new sendDb();
+        DB.danmu(saveData);
+
         setDbData = [];
         return true;
     }

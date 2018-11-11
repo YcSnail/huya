@@ -3,22 +3,19 @@
     {
       "name": "huya_danmu",
       "cwd": "/home/wwwroot/nodejs/huya",
-      "script": "/home/wwwroot/nodejs/huya/danmu.js",
+      "script": "./danmu.js",
       "log_date_format": "YYYY-MM-DD HH:mm Z",
       "error_file": "/home/wwwroot/nodejs/logs/node-app.stderr.log",
       "out_file": "/home/wwwroot/nodejs/logs/node-app.stdout.log",
       "pid_file": "/home/wwwroot/nodejs/logs/node-geo-api.pid",
-      "instances": 6,
+      "instances": 1,
       "min_uptime": "2678400s",
       "max_restarts": 10,
       "max_memory_restart": "1M",
       "cron_restart": "1 0 * * *",
       "watch": true,
-      "merge_logs": true,
-      "exec_interpreter": "node",
       "exec_mode": "fork",
-      "autorestart": true,
-      "vizion": false
+      "autorestart": true
     }
   ]
 }
