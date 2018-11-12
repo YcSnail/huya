@@ -20,7 +20,7 @@ client.on('message', msg => {
             break;
         case 'gift':
             // 判断价格
-            if (msg.price >=0){
+            if (msg.price >=88){
                 setGift(msg);
             }
             break;
@@ -97,7 +97,7 @@ function setData(msg){
     setDbData.push(tmpObj);
 
     //
-    if (setDbData.length >= 1){
+    if (setDbData.length >= 10){
         // 写入到数据库
         var saveData = {'danmu':setDbData};
         console.log('insert');
