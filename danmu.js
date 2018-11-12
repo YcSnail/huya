@@ -1,5 +1,9 @@
 const huya_danmu = require('./index');
 const roomid = 'longdd';
+// kaerlol
+// longdd
+// qingwa666
+
 const client = new huya_danmu(roomid);
 const sendDb = require('./sendDb');
 
@@ -10,16 +14,15 @@ client.on('connect', () => {
 client.on('message', msg => {
     switch (msg.type) {
         case 'chat':
+
             setData(msg);
             // console.log(`[${msg.from.name}]`+ msg.content);
             break;
         case 'gift':
-
             // 判断价格
             if (msg.price >=0){
                 setGift(msg);
             }
-            console.log(`[${msg.from.name}]->赠送${msg.count}个${msg.name}`)
             break;
         case 'online':
             // console.log(`[当前人气]:${msg.count}`)
@@ -46,8 +49,11 @@ function setGift(msg){
     var count = msg.count;
     var price = msg.price;
     var createtime = msg.time;
+    var id = msg.id;
+
 
     var tmpObj = {};
+    tmpObj.id = id;
     tmpObj.username = userName;
     tmpObj.giftName = giftName;
     tmpObj.count = count;
@@ -56,7 +62,7 @@ function setGift(msg){
     setDbGift.push(tmpObj);
 
     //
-    if (setDbGift.length >= 10){
+    if (setDbGift.length >= 1){
         // 写入到数据库
         var saveData = {'gift':setDbGift};
         console.log('insert gift');
@@ -74,6 +80,7 @@ function setData(msg){
     var userName = msg.from.name;
     var content = msg.content;
     var createtime = msg.time;
+    var yy_id = msg.from.yy_id;
 
     // 过滤 代言消息
     var check = checkMessage(content);
@@ -84,12 +91,13 @@ function setData(msg){
 
     var tmpObj = {};
     tmpObj.username = userName;
+    tmpObj.yy_id = yy_id;
     tmpObj.content = content;
     tmpObj.createtime = parseInt(createtime/1000);
     setDbData.push(tmpObj);
 
     //
-    if (setDbData.length >= 10){
+    if (setDbData.length >= 1){
         // 写入到数据库
         var saveData = {'danmu':setDbData};
         console.log('insert');
@@ -112,7 +120,7 @@ function checkMessage(content) {
     }
 
     // 检查 过滤无用弹幕
-    var check =  ['分享了直播间','hahaha','哈哈哈','2333','6666','牛逼','收','高能预警',
+    var check =  ['激动的心','颤抖的手','分享了直播间','hahaha','哈哈哈','2333','6666','牛逼','收','高能预警',
         '前方高能反应','????','....','。。。。','支付宝','QQ','qq','？？？？','3333','¿¿¿¿','/{'];
 
     for (var i=0;i<check.length;i++){
@@ -128,4 +136,3 @@ function checkMessage(content) {
 
     return true;
 }
-

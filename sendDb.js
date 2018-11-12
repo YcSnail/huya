@@ -27,6 +27,7 @@ class sendDb{
 
 
     danmu(data){
+
         // var url="http://hx.yuanxu.top/api/Danmu/add";
         var url="http://huya.web/api/danmu/add";
 
