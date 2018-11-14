@@ -1,5 +1,5 @@
 const huya_danmu = require('./index');
-const roomid = 'lafeng';
+const roomid = 'longdd';
 // kaerlol
 // longdd
 // lafeng
@@ -21,7 +21,7 @@ client.on('message', msg => {
         case 'gift':
 
             // 判断价格
-            if (msg.price >=0){
+            if (msg.price >=88){
                 setGift(msg);
             }
             break;
@@ -89,7 +89,7 @@ function setData(msg){
     // 过滤 代言消息
     var check = checkMessage(content);
 
-    if (!check || content == ''){
+    if (!check){
         return false;
     }
 
@@ -105,7 +105,7 @@ function setData(msg){
     if (setDbData.length >= 10){
         // 写入到数据库
         var saveData = {'danmu':setDbData};
-        console.log('insert');
+        console.log('insert danmu');
         var DB = new sendDb();
         DB.danmu(saveData);
 
