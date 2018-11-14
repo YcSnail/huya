@@ -1,8 +1,8 @@
 const huya_danmu = require('./index');
-const roomid = 'longdd';
+const roomid = 'lafeng';
 // kaerlol
 // longdd
-// qingwa666
+// lafeng
 
 const client = new huya_danmu(roomid);
 const sendDb = require('./sendDb');
@@ -19,8 +19,9 @@ client.on('message', msg => {
             // console.log(`[${msg.from.name}]`+ msg.content);
             break;
         case 'gift':
+
             // 判断价格
-            if (msg.price >=88){
+            if (msg.price >=0){
                 setGift(msg);
             }
             break;
@@ -45,6 +46,7 @@ var setDbGift = [];
 function setGift(msg){
 
     var userName = msg.from.name;
+    var user_id = msg.from.rid;
     var giftName = msg.name;
     var count = msg.count;
     var price = msg.price;
@@ -55,6 +57,7 @@ function setGift(msg){
     var tmpObj = {};
     tmpObj.id = id;
     tmpObj.username = userName;
+    tmpObj.user_id = user_id;
     tmpObj.giftName = giftName;
     tmpObj.count = count;
     tmpObj.price = price;
@@ -81,6 +84,7 @@ function setData(msg){
     var content = msg.content;
     var createtime = msg.time;
     var yy_id = msg.from.yy_id;
+    var user_id = msg.from.rid;
 
     // 过滤 代言消息
     var check = checkMessage(content);
@@ -92,6 +96,7 @@ function setData(msg){
     var tmpObj = {};
     tmpObj.username = userName;
     tmpObj.yy_id = yy_id;
+    tmpObj.user_id = user_id;
     tmpObj.content = content;
     tmpObj.createtime = parseInt(createtime/1000);
     setDbData.push(tmpObj);

@@ -4,8 +4,8 @@ class sendDb{
 
     gift(data){
 
-        var url="http://hx.yuanxu.top/api/Danmu/addGift";
-        // var url="http://huya.web/api/danmu/addGift";
+        // var url="http://hx.yuanxu.top/api/Danmu/addGift";
+        var url="http://huya.web/api/danmu/addGift";
 
         request({
             url: url,
@@ -28,8 +28,8 @@ class sendDb{
 
     danmu(data){
 
-        var url="http://hx.yuanxu.top/api/Danmu/add";
-        // var url="http://huya.web/api/danmu/add";
+        // var url="http://hx.yuanxu.top/api/Danmu/add";
+        var url="http://huya.web/api/danmu/add";
 
         request({
             url: url,
