@@ -1,5 +1,5 @@
 const huya_danmu = require('./index');
-const roomid = 'bbwen';
+const roomid = 'longdd';
 // kaerlol
 // longdd
 // lafeng
@@ -20,9 +20,8 @@ client.on('message', msg => {
             break;
         case 'gift':
 
-            return false;
             // 判断价格
-            if (msg.price >=0){
+            if (msg.price >=88){
                 setGift(msg);
             }
             break;
@@ -66,7 +65,7 @@ function setGift(msg){
     setDbGift.push(tmpObj);
 
     //
-    if (setDbGift.length >= 10){
+    if (setDbGift.length >= 1){
         // 写入到数据库
         var saveData = {'gift':setDbGift};
         console.log('insert gift');
@@ -106,7 +105,6 @@ function setData(msg){
 
     //
     if (setDbData.length >= 10){
-        console.log(setDbData);
         // 写入到数据库
         var saveData = {'danmu':setDbData};
         console.log('insert danmu');
