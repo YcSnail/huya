@@ -14,18 +14,25 @@ client.on('connect', () => {
 client.on('message', msg => {
     switch (msg.type) {
         case 'chat':
+            return;
 
             setData(msg);
             // console.log(`[${msg.from.name}]`+ msg.content);
             break;
         case 'gift':
 
+            return;
             // 判断价格
             if (msg.price >=88){
                 setGift(msg);
             }
             break;
         case 'online':
+
+            setOnline(msg);
+
+            msg.time = parseInt(msg.time/1000);
+            console.log(msg);
             // console.log(`[当前人气]:${msg.count}`)
             break
     }
@@ -39,6 +46,30 @@ client.on('close', () => {
     console.log('close')
 });
 client.start();
+
+function setOnline(msg) {
+
+    var count = msg.count;
+    var time = msg.time;
+
+    var setDbOnline = {
+        'count':count,
+        'time':parseInt(time/1000)
+    };
+
+    //
+    if (setDbOnline){
+        // 写入到数据库
+        var saveData = {'online':setDbOnline};
+        console.log('insert online');
+        var DB = new sendDb();
+        DB.online(saveData);
+        setDbGift = [];
+        return true;
+    }
+
+}
+
 
 // 请求数据库保存
 var setDbGift = [];
