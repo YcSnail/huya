@@ -14,14 +14,10 @@ client.on('connect', () => {
 client.on('message', msg => {
     switch (msg.type) {
         case 'chat':
-            return;
-
             setData(msg);
             // console.log(`[${msg.from.name}]`+ msg.content);
             break;
         case 'gift':
-
-            return;
             // 判断价格
             if (msg.price >=88){
                 setGift(msg);
@@ -30,9 +26,6 @@ client.on('message', msg => {
         case 'online':
 
             setOnline(msg);
-
-            msg.time = parseInt(msg.time/1000);
-            console.log(msg);
             // console.log(`[当前人气]:${msg.count}`)
             break
     }
